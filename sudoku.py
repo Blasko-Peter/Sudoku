@@ -13,15 +13,17 @@ def start_game():
             index += 1
         else:
             print("Hibás nehézségi szint!")
-    game_table = create_game_table(game_table, difficult_level)
+    start_number = 0
+    end_number = 8
+    game_table = create_game_table(game_table, difficult_level, start_number, end_number)
     play_game(the_table, game_table, difficult_level)
 
 
-def create_game_table(game_table, difficult_level):
+def create_game_table(game_table, difficult_level, start_number, end_number):
     for i in range(0, len(game_table)):
         numbers = set()
         while len(numbers) < (int(difficult_level) * 2) - 1:
-            number = random_int(0, 8)
+            number = random_int(start_number, end_number)
             numbers.add(number)
         for num in numbers:
             game_table[i][num] = " "
