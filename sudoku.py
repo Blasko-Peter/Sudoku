@@ -13,7 +13,7 @@ def start_game():
         else:
             print("Hibás nehézségi szint!")
     game_table = create_game_table(the_table, difficult_level)
-    print(game_table)
+    play_game(the_table, game_table)
 
 
 def create_game_table(the_table, difficult_level):
@@ -30,6 +30,21 @@ def create_game_table(the_table, difficult_level):
 def random_int(start, end):
     number = random.randint(start, end)
     return number
+
+
+def play_game(the_table, game_table):
+    print_table(game_table)
+    return 0
+
+
+def print_table(game_table):
+    print("=========================")
+    for i in range(0, len(game_table)):
+        print('| %s %s %s | %s %s %s | %s %s %s |' % (
+                game_table[i][0], game_table[i][1], game_table[i][2], game_table[i][3], game_table[i][4],
+                game_table[i][5], game_table[i][6], game_table[i][7], game_table[i][8]))
+        if i % 3 == 2:
+            print("=========================")
 
 
 def database():
