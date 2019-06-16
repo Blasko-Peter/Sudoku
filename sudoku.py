@@ -13,7 +13,7 @@ def start_game():
         else:
             print("Hibás nehézségi szint!")
     game_table = create_game_table(the_table, difficult_level)
-    play_game(the_table, game_table)
+    play_game(the_table, game_table, difficult_level)
 
 
 def create_game_table(the_table, difficult_level):
@@ -32,19 +32,44 @@ def random_int(start, end):
     return number
 
 
-def play_game(the_table, game_table):
-    print_table(game_table)
+def play_game(the_table, game_table, difficult_level):
+    number_of_space = ((int(difficult_level) * 2) - 1) * 9
+    while number_of_space > 0:
+        print_table(game_table)
+        actual_row = check_character("Adja meg a sor betűjelét (A-I): ")
+        actual_column = input("Adja meg az oszlop számát (1-9): ")
+        actual_number = input("Adja meg a kívánt számot (1-9): ")
+        print(actual_row)
+
     return 0
 
 
+def check_character(question):
+    characters = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7, 'I':8}
+    index = 0
+    actual_row_number = 9
+    while index < 1:
+        character = input(question)
+        if character in characters:
+            actual_row_number = characters.get(character)
+            index += 1
+        elif(character == 'q'):
+            exit()
+        else:
+            print("Hibás karakter!")
+    return actual_row_number
+
+
 def print_table(game_table):
-    print("=========================")
+    rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+    print("    1 2 3   4 5 6   7 8 9 ")
+    print("  =========================")
     for i in range(0, len(game_table)):
-        print('| %s %s %s | %s %s %s | %s %s %s |' % (
-                game_table[i][0], game_table[i][1], game_table[i][2], game_table[i][3], game_table[i][4],
+        print('%s | %s %s %s | %s %s %s | %s %s %s |' % (
+                rows[i], game_table[i][0], game_table[i][1], game_table[i][2], game_table[i][3], game_table[i][4],
                 game_table[i][5], game_table[i][6], game_table[i][7], game_table[i][8]))
         if i % 3 == 2:
-            print("=========================")
+            print("  =========================")
 
 
 def database():
