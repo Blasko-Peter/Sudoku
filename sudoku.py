@@ -3,6 +3,7 @@ import random
 
 def start_game():
     the_table = database()
+    game_table = database()
     index = 0
     difficult_level = 0
     while index < 1:
@@ -12,19 +13,19 @@ def start_game():
             index += 1
         else:
             print("Hibás nehézségi szint!")
-    game_table = create_game_table(the_table, difficult_level)
+    game_table = create_game_table(game_table, difficult_level)
     play_game(the_table, game_table, difficult_level)
 
 
-def create_game_table(the_table, difficult_level):
-    for i in range(0, len(the_table)):
+def create_game_table(game_table, difficult_level):
+    for i in range(0, len(game_table)):
         numbers = set()
         while len(numbers) < (int(difficult_level) * 2) - 1:
             number = random_int(0, 8)
             numbers.add(number)
         for num in numbers:
-            the_table[i][num] = " "
-    return the_table
+            game_table[i][num] = " "
+    return game_table
     
 
 def random_int(start, end):
@@ -33,15 +34,42 @@ def random_int(start, end):
 
 
 def play_game(the_table, game_table, difficult_level):
+    result = 0
     number_of_space = ((int(difficult_level) * 2) - 1) * 9
     while number_of_space > 0:
         print_table(game_table)
         actual_row = check_character("Adja meg a sor betűjelét (A-I): ")
-        actual_column = check_number("Adja meg az oszlop számát (1-9): ")
+        actual_column = int(check_number("Adja meg az oszlop számát (1-9): ")) - 1
         actual_number = check_number("Adja meg a kívánt számot (1-9): ")
-        print(actual_row)
-        print(actual_column)
-        print(actual_number)
+        if game_table[actual_row][actual_column] == " ":
+            game_table[actual_row][actual_column] = actual_number
+            result += check_result(the_table, actual_row, actual_column, actual_number)
+            number_of_space -= 1
+        else:
+            print("Ez a hely már foglalt!")
+    end_game(game_table, result)
+
+
+def check_result(the_table, actual_row, actual_column, actual_number):
+    good_answer = 0
+    if the_table[actual_row][actual_column] == actual_number:
+        good_answer += 1
+    return good_answer
+
+
+def end_game(game_table, result):
+    print_table(game_table)
+    print("Neked " + str(result) + " pontod lett!")
+    index = 0
+    while index < 1:
+        answer = input("Szeretnél új játékot? (Y / N) ")
+        if answer == 'Y':
+            index += 1
+        elif answer == 'N':
+            exit()
+        else:
+            print("Hibás válasz!")
+    start_game()
 
 
 def check_character(question):
