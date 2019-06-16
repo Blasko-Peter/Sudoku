@@ -1,3 +1,6 @@
+import random
+
+
 def start_game():
     the_table = database()
     index = 0
@@ -9,7 +12,24 @@ def start_game():
             index += 1
         else:
             print("Hibás nehézségi szint!")
-    print(difficult_level)
+    game_table = create_game_table(the_table, difficult_level)
+    print(game_table)
+
+
+def create_game_table(the_table, difficult_level):
+    for i in range(0, len(the_table)):
+        numbers = set()
+        while len(numbers) < (int(difficult_level) * 2) - 1:
+            number = random_int(0, 8)
+            numbers.add(number)
+        for num in numbers:
+            the_table[i][num] = " "
+    return the_table
+    
+
+def random_int(start, end):
+    number = random.randint(start, end)
+    return number
 
 
 def database():
