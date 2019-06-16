@@ -1,7 +1,7 @@
 # Sudoku
 
 # Ez volt az első saját projektem, amit pythonban írtam. 
-# Csak VS Code-ot használtam a projekt megvalósításában.
+# Csak VS Code-ot használtam a projekt megvalósításában. És a gitHub-ot sem ismertem túlságosan, így csak a master branch-et használtam a commit-oknál.
 # És itt még sem a html-t sem a css-t nem ismertem, így ez csak terminálon fut.
 # A játék visszaadja a sudoku élményt.
 
