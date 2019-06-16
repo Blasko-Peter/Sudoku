@@ -37,11 +37,11 @@ def play_game(the_table, game_table, difficult_level):
     while number_of_space > 0:
         print_table(game_table)
         actual_row = check_character("Adja meg a sor betűjelét (A-I): ")
-        actual_column = input("Adja meg az oszlop számát (1-9): ")
-        actual_number = input("Adja meg a kívánt számot (1-9): ")
+        actual_column = check_number("Adja meg az oszlop számát (1-9): ")
+        actual_number = check_number("Adja meg a kívánt számot (1-9): ")
         print(actual_row)
-
-    return 0
+        print(actual_column)
+        print(actual_number)
 
 
 def check_character(question):
@@ -58,6 +58,19 @@ def check_character(question):
         else:
             print("Hibás karakter!")
     return actual_row_number
+
+
+def check_number(question):
+    index = 0
+    actual_number = 0
+    while index < 1:
+        number = input(question)
+        if number in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            actual_number = number
+            index += 1
+        else:
+            print("Hibás szám!")
+    return actual_number
 
 
 def print_table(game_table):
